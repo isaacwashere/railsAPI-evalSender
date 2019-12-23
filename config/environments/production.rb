@@ -74,7 +74,7 @@ Rails.application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { host: "" }
+  config.action_mailer.default_url_options = { host: "https://eval-app-api.herokuapp.com/" }
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
@@ -84,6 +84,16 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  ActionMailer::Base.smtp_settings = {
+    :user_name => 'apikey',
+    :password => ENV['SENDGRID_API_KEY'],
+    :domain => 'gmail.com',
+    :address => 'smtp.sendgrid.net',
+    :port => 465,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+}
 
   # Inserts middleware to perform automatic connection switching.
   # The `database_selector` hash is used to pass options to the DatabaseSelector
