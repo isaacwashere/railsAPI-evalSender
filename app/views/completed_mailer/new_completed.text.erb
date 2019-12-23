@@ -1,0 +1,19 @@
+Completed Self Evalutaion for <%= @user.name %>
+
+My Email: <%= @user.email %>
+Project Repo: <%= @user.projectRepo %>
+Project URL: <%= @user.projectURL %>
+
+Self Evaluation Results
+
+<% @questions.each do |question| %>
+  <% qId = question["client_id"] %>
+  <%  @responses.map do |response| %>
+    <%if response.question_id === qId %>
+      Question: <%= question["body"].delete_suffix(':') %>
+      Score: <%= response.body %>
+    <% end %>
+  <% end %>
+<% end %>
+
+Thanks!
